@@ -1,0 +1,424 @@
+MANUAL TEST CASES - QASHIER HQ STAFF MANAGEMENT
+===============================================
+
+Project: Qashier HQ - Staff Management Testing
+Tester: QA Team
+Date: December 2025
+Application URL: https://hq.qashier.com
+
+Test Environment:
+- Browser: Chrome (latest version)
+- Test Account: test369@gmail.com / test@123
+- Network: Stable internet connection required
+
+Note: The test account is on a Lite plan, so we can only have 1 staff member at a time. 
+Need to delete existing staff before adding new ones for testing.
+
+==============================================
+SECTION 1: USER LOGIN
+==============================================
+
+TC-001: Login with valid credentials
+-------------------------------------
+Steps:
+1. Go to https://hq.qashier.com/#/login
+2. Enter email: test369@gmail.com
+3. Enter password: test@123
+4. Click Login button
+
+Expected Result:
+- Should login successfully
+- Dashboard page should load
+- User should see "Staff Management" option in sidebar
+
+Priority: High
+
+
+TC-002: Login with wrong password
+----------------------------------
+Steps:
+1. Go to login page
+2. Enter correct email
+3. Enter wrong password (e.g., wrongpass123)
+4. Click Login
+
+Expected Result:
+- Should show error message
+- Should not login
+- Error message should be clear
+
+Priority: Medium
+
+
+TC-003: Login with empty fields
+--------------------------------
+Steps:
+1. Go to login page
+2. Leave email and password empty
+3. Try to click Login
+
+Expected Result:
+- Should show validation error
+- Login button might be disabled
+- Should ask to fill required fields
+
+Priority: Low
+
+
+==============================================
+SECTION 2: ADD STAFF FUNCTIONALITY
+==============================================
+
+TC-004: Add staff with all valid details
+-----------------------------------------
+Precondition: Login to application, no existing staff in list
+
+Steps:
+1. Click "Staff Management" from left menu
+2. Click "Staff Management" again from dropdown
+3. Click "ADD STAFF" button
+4. Enter Staff Name: "John Doe"
+5. Enter Hourly Rate: 12
+6. Enter Staff PIN: 1234
+7. Enter Confirm PIN: 1234
+8. Click "CONFIRM"
+
+Expected Result:
+- Form should close
+- Staff "John Doe" should appear in the list
+- Should show success message or notification
+- Details should be correct in the list
+
+Priority: High
+
+
+TC-005: Add staff with empty name
+----------------------------------
+Steps:
+1. Click ADD STAFF
+2. Leave Name field empty
+3. Fill PIN: 1234
+4. Fill Hourly Rate: 10
+5. Click CONFIRM
+
+Expected Result:
+- Should show validation error
+- Should not add staff
+- Error message like "Name is required"
+
+Priority: High
+
+
+TC-006: Add staff with mismatched PIN
+--------------------------------------
+Steps:
+1. Click ADD STAFF
+2. Fill Name: "Jane Smith"
+3. Fill Staff PIN: 1234
+4. Fill Confirm PIN: 5678 (different)
+5. Click CONFIRM
+
+Expected Result:
+- Should show error about PIN mismatch
+- Should not add staff
+- Should ask to enter same PIN in both fields
+
+Priority: High
+
+
+TC-007: Add staff with invalid PIN (less than 4 digits)
+--------------------------------------------------------
+Steps:
+1. Click ADD STAFF
+2. Fill Name: "Mike Wilson"
+3. Try entering PIN: 12 (only 2 digits)
+4. Fill other fields
+5. Try to submit
+
+Expected Result:
+- Should show validation error for PIN
+- PIN field should require 4 digits
+- Should not allow submission
+
+Priority: Medium
+
+
+TC-008: Add staff with negative hourly rate
+--------------------------------------------
+Steps:
+1. Click ADD STAFF
+2. Fill Name: "Test User"
+3. Try entering Hourly Rate: -5
+4. Fill PIN fields correctly
+5. Click CONFIRM
+
+Expected Result:
+- Should not accept negative numbers
+- Should show validation error
+- Hourly rate should be positive number only
+
+Priority: Medium
+
+
+TC-009: Cancel adding staff
+----------------------------
+Steps:
+1. Click ADD STAFF
+2. Fill some details
+3. Click Cancel or X to close
+
+Expected Result:
+- Dialog should close
+- No staff should be added
+- List should remain unchanged
+
+Priority: Low
+
+
+==============================================
+SECTION 3: EDIT STAFF FUNCTIONALITY
+==============================================
+
+TC-010: Edit staff name
+-----------------------
+Precondition: At least one staff exists in the list
+
+Steps:
+1. Click on existing staff in the list
+2. Edit dialog opens with current details
+3. Change the name (e.g., "John Doe" to "John Smith")
+4. Keep other fields same
+5. Click CONFIRM
+
+Expected Result:
+- Dialog should close
+- Updated name should show in the list
+- Other details should remain unchanged
+- No errors should occur
+
+Priority: High
+
+
+TC-011: Edit staff hourly rate
+-------------------------------
+Steps:
+1. Click on staff in list
+2. Change Hourly Rate from 10 to 15
+3. Keep other fields same
+4. Click CONFIRM
+
+Expected Result:
+- Rate should update successfully
+- New rate should show in list
+- No data loss for other fields
+
+Priority: High
+
+
+TC-012: Edit staff PIN
+-----------------------
+Steps:
+1. Click on staff
+2. Change PIN to new 4-digit number
+3. Confirm new PIN
+4. Click CONFIRM
+
+Expected Result:
+- PIN should update
+- No errors
+- Staff should still appear in list
+
+Priority: Medium
+
+
+TC-013: Edit without making changes
+------------------------------------
+Steps:
+1. Click on staff
+2. Don't change anything
+3. Just click CONFIRM
+
+Expected Result:
+- Should close without errors
+- Data should remain same
+- No unnecessary updates
+
+Priority: Low
+
+
+TC-014: Cancel editing
+----------------------
+Steps:
+1. Click on staff
+2. Make some changes
+3. Click Cancel or X
+
+Expected Result:
+- Dialog closes
+- Changes should NOT be saved
+- Original data should remain in list
+
+Priority: Medium
+
+
+==============================================
+SECTION 4: DELETE STAFF FUNCTIONALITY
+==============================================
+
+TC-015: Delete staff successfully
+----------------------------------
+Precondition: At least one staff exists
+
+Steps:
+1. Click on staff in the list
+2. Click "Delete" button
+3. Confirmation popup should appear
+4. Click "Confirm" in the popup
+
+Expected Result:
+- Staff should be deleted
+- Staff should disappear from list
+- If it was the last staff, should show "No data available"
+- Should show success message
+
+Priority: High
+
+
+TC-016: Cancel delete operation
+--------------------------------
+Steps:
+1. Click on staff
+2. Click Delete
+3. In confirmation dialog, click Cancel
+
+Expected Result:
+- Delete should be cancelled
+- Staff should remain in the list
+- No changes to data
+
+Priority: Medium
+
+
+TC-017: Delete the only staff in list
+--------------------------------------
+Precondition: Only one staff exists
+
+Steps:
+1. Click on the staff
+2. Click Delete
+3. Confirm deletion
+
+Expected Result:
+- Staff should be deleted
+- List should be empty
+- Should show "No data available" message
+- ADD STAFF button should still work
+
+Priority: High
+
+
+==============================================
+SECTION 5: UI/UX CHECKS
+==============================================
+
+TC-018: Check responsive design on mobile
+------------------------------------------
+Steps:
+1. Open application on mobile phone
+2. Try to add/edit/delete staff
+3. Check if all buttons are clickable
+
+Expected Result:
+- Layout should adjust to mobile screen
+- All features should work
+- Buttons should be easy to tap
+- No overlapping elements
+
+Priority: Medium
+
+
+TC-019: Check required field indicators
+----------------------------------------
+Steps:
+1. Open Add Staff form
+2. Check which fields have * or "required" label
+
+Expected Result:
+- Required fields should be clearly marked
+- Users should know which fields are mandatory
+- Good user experience
+
+Priority: Low
+
+
+TC-020: Check form validation messages
+---------------------------------------
+Steps:
+1. Try submitting forms with invalid data
+2. Check error messages
+
+Expected Result:
+- Error messages should be clear and helpful
+- Should tell user what's wrong
+- Should tell user how to fix it
+- No technical jargon
+
+Priority: Medium
+
+
+==============================================
+NOTES AND OBSERVATIONS:
+==============================================
+
+Known Issues:
+- Lite plan limits to 1 staff only, so can't test multiple staff scenarios fully
+- Need to delete before adding for repeated testing
+
+Test Data Used:
+- Staff Names: John Doe, Jane Smith, Mike Wilson, Sarah Johnson
+- PINs: 1234, 5678, 9999, 1111
+- Hourly Rates: 10, 12, 15, 8
+
+Browser Compatibility:
+- Tested on Chrome (working)
+- Should also test on Firefox and Safari
+- Mobile testing needed
+
+Performance:
+- Page loads quickly (under 3 seconds)
+- Form submissions are fast
+- No major lag noticed
+
+Suggestions for Improvement:
+- Add bulk delete option
+- Add search/filter in staff list when there are many staff
+- Add export staff list feature
+- Show more detailed staff information in list
+
+==============================================
+TEST SUMMARY:
+==============================================
+
+Total Test Cases: 20
+Critical/High Priority: 11
+Medium Priority: 7
+Low Priority: 2
+
+Coverage:
+- Login: 3 test cases
+- Add Staff: 6 test cases
+- Edit Staff: 5 test cases  
+- Delete Staff: 3 test cases
+- UI/UX: 3 test cases
+
+Estimated Testing Time: 2-3 hours for complete manual testing
+
+Dependencies:
+- Need valid test account
+- Need stable internet
+- Need Chrome browser (or other supported browser)
+
+==============================================
+END OF TEST CASES DOCUMENT
+==============================================
+
